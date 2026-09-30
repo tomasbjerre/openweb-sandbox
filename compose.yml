@@ -1,6 +1,6 @@
 services:
   openwebui:
-    image: ghcr.io/open-webui/open-webui:main
+    image: ghcr.io/open-webui/open-webui:v0.11.4
     container_name: open-webui
     restart: unless-stopped
 
@@ -8,7 +8,7 @@ services:
       OPENAI_API_KEY: "${OPENROUTER_API_KEY}"
       OPENAI_API_BASE_URL: "https://openrouter.ai/api/v1"
       OPENAI_API_ORG: "OpenRouter"
-      OPENAI_MODEL_LIST: "true"
+      #OPENAI_MODEL_LIST: "true"
       OPENROUTER_TITLE: "OpenRouter via OpenWebUI"
       OPENROUTER_REFERER: "http://localhost:3000"
 
