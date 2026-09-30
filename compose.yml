@@ -38,7 +38,7 @@ services:
       OPEN_TERMINAL_MULTI_USER: "false"
 
       # GitHub CLI
-      OPEN_TERMINAL_PACKAGES: "gh"
+      #OPEN_TERMINAL_PACKAGES: "gh"
 
       # Optional: make the agent's capabilities explicit
       OPEN_TERMINAL_EXECUTE_DESCRIPTION: >-
