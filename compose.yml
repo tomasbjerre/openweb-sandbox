@@ -1,0 +1,56 @@
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+
+    environment:
+      OPENAI_API_KEY: "${OPENROUTER_API_KEY}"
+      OPENAI_API_BASE_URL: "https://openrouter.ai/api/v1"
+      OPENAI_API_ORG: "OpenRouter"
+      OPENAI_MODEL_LIST: "true"
+      OPENROUTER_TITLE: "OpenRouter via OpenWebUI"
+      OPENROUTER_REFERER: "http://localhost:3000"
+
+      # Generate with: openssl rand -hex 32
+      WEBUI_SECRET_KEY: "${WEBUI_SECRET_KEY}"
+
+    ports:
+      - "3000:8080"
+
+    volumes:
+      - openwebui_data:/app/backend/data
+
+    depends_on:
+      - open-terminal
+
+
+  open-terminal:
+    image: ghcr.io/open-webui/open-terminal:latest
+    container_name: open-terminal
+    restart: unless-stopped
+
+    environment:
+      # Must be the same value configured in Open WebUI
+      OPEN_TERMINAL_API_KEY: "${OPEN_TERMINAL_API_KEY}"
+
+      # Give each Open WebUI user their own workspace
+      OPEN_TERMINAL_MULTI_USER: "false"
+
+      # GitHub CLI
+      OPEN_TERMINAL_PACKAGES: "gh"
+
+      # Optional: make the agent's capabilities explicit
+      OPEN_TERMINAL_EXECUTE_DESCRIPTION: >-
+        Git, GitHub CLI (gh), curl, Node.js, Python, build tools,
+        and common development tools are available.
+
+    volumes:
+      - open-terminal:/home
+
+    # No ports needed. Open WebUI talks to it internally.
+
+
+volumes:
+  openwebui_data:
+  open-terminal:
