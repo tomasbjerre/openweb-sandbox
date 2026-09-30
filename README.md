@@ -16,5 +16,5 @@ Here is what I did:
   - Test it from outside Docker: `docker exec open-terminal sh -c 'echo "terminal works"; gh auth status'`
 - In OpenWebUI, configure Terminal
   - `Settings` / `Integrations` / `Open Terminal`
-  - User URL that is printed when container starts
+  - URL: `http://open-terminal:8000`
   - Set Auth Bearer with value of `WEBUI_SECRET_KEY`
